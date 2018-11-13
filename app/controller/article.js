@@ -48,6 +48,7 @@ class Article extends Controller {
             const article = await service.article.findOne(this.ctx.params)
             return ctx.helper.success(ctx, article)
         } catch (err) {
+    
             return ctx.helper.error(ctx, error_001[ 0 ], error_001[ 1 ])
         }
     }
@@ -70,6 +71,8 @@ class Article extends Controller {
             const article = await service.article.find(ctx.request.query)
             return ctx.helper.success(ctx, article)
         } catch (err) {
+            console.log(err)
+    
             return ctx.helper.error(ctx, error_001[ 0 ], error_001[ 1 ])
         }
     }
