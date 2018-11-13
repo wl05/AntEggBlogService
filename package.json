@@ -26,7 +26,7 @@
         "node": ">=8.9.0"
     },
     "scripts": {
-        "start": "egg-scripts start  --title=egg-server-AntEggBlogService",
+        "start": "egg-scripts start --title=egg-server-AntEggBlogService",
         "stop": "egg-scripts stop --title=egg-server-AntEggBlogService",
         "dev": "egg-bin dev",
         "debug": "egg-bin debug",
