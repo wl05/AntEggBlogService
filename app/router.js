@@ -14,6 +14,10 @@ module.exports = app => {
     router.get('/articles/:_id', controller.article.getArticle)
     router.put('/articles/:_id', jwt, controller.article.findByIdAndUpdate)
     router.delete('/articles/:id', jwt, controller.article.deleteArticle)
+    router.get('/articles/tags/:tag', controller.article.findByTag)
+    router.get('/articles/category/:category', controller.article.findByCategory)
+    
+    
     router.post('/img/upload', jwt, controller.images.upload)
     router.post('/categories', jwt, controller.categories.create)
     router.get('/categories', controller.categories.getCategories)

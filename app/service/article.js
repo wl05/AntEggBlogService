@@ -29,6 +29,7 @@ class ArticleService extends Service {
         const article = await this.ctx.model.Article.find({...condition, status : {$ne : '2'}})
             .populate('tag', "name")
             .populate('creator', "name")
+            .populate('category', "name")
             .skip((pageSize - 1) * pageLimit)
             .limit(pageLimit)
             .sort({'publishAt' : -1})
@@ -51,6 +52,30 @@ class ArticleService extends Service {
         return await this.ctx.model.Article.updateMany({category : id}, {$set : {status : 2}})
     }
     
+    async findByTag (tag) {
+        return await this.ctx.model.Article.find({tag, status : {$ne : '2'}}, {
+            publishAt : 1,
+            title : 1
+        })
+    }
+    
+    async findByCategory (category) {
+        return await this.ctx.model.Article.find({category, status : {$ne : '2'}}, {
+            publishAt : 1,
+            title : 1
+        })
+    }
+    
+    async updateViewCount (_id) {
+        return await this.ctx.model.Article.updateOne({_id}, {
+            $inc : {
+                viewCount : 1
+            }
+        })
+    }
+    
+    
 }
+
 
 module.exports = ArticleService

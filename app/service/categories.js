@@ -29,11 +29,10 @@ class CategoriesService extends Service {
             {
                 $unwind : {
                     path : "$articles",
-                    preserveNullAndEmptyArrays : true // 空的数组也拆分
+                    // preserveNullAndEmptyArrays : true // 空的数组也拆分
                 }
             },
             {$match : {"articles.status" : {$ne : '2'}}},
-            
             {$group : {_id : '$_id', name : {$first : "$name"}, total : {$sum : 1}}},
         
         ])

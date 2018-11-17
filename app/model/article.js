@@ -37,6 +37,10 @@ module.exports = app => {
             default : '1',
             enum : [ '1', '2' ] // '1'表示草稿，'2'表示发布
         },
+        viewCount : {
+            type : Number,
+            default : 0
+        },
         createAt : {
             type : Number,
             default : Date.now

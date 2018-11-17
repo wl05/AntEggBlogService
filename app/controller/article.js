@@ -45,10 +45,11 @@ class Article extends Controller {
         }
         
         try {
+            await service.article.updateViewCount(this.ctx.params._id)
             const article = await service.article.findOne(this.ctx.params)
             return ctx.helper.success(ctx, article)
         } catch (err) {
-    
+            console.log(err)
             return ctx.helper.error(ctx, error_001[ 0 ], error_001[ 1 ])
         }
     }
@@ -72,7 +73,7 @@ class Article extends Controller {
             return ctx.helper.success(ctx, article)
         } catch (err) {
             console.log(err)
-    
+            
             return ctx.helper.error(ctx, error_001[ 0 ], error_001[ 1 ])
         }
     }
@@ -127,10 +128,48 @@ class Article extends Controller {
                 deletedAt : Date.now(),
                 status : '2'
             }
-            const categories = await service.article.findByIdAndUpdate(ctx.params.id, updatingContent)
+            const article = await service.article.findByIdAndUpdate(ctx.params.id, updatingContent)
             
-            return ctx.helper.success(ctx, categories)
+            return ctx.helper.success(ctx, article)
         } catch (err) {
+            return ctx.helper.error(ctx, error_001[ 0 ], error_001[ 1 ])
+        }
+    }
+    
+    async findByTag () {
+        const {ctx, service} = this
+        const validatorParams = struct({
+            tag : 'string'
+        })
+        try {
+            validatorParams(ctx.params)
+        } catch (err) {
+            return ctx.helper.error(ctx, error_002[ 0 ], error_002[ 1 ])
+        }
+        try {
+            const article = await service.article.findByTag(ctx.params.tag)
+            return ctx.helper.success(ctx, article)
+        } catch (err) {
+            console.log(err)
+            return ctx.helper.error(ctx, error_001[ 0 ], error_001[ 1 ])
+        }
+    }
+    
+    async findByCategory () {
+        const {ctx, service} = this
+        const validatorParams = struct({
+            category : 'string'
+        })
+        try {
+            validatorParams(ctx.params)
+        } catch (err) {
+            return ctx.helper.error(ctx, error_002[ 0 ], error_002[ 1 ])
+        }
+        try {
+            const article = await service.article.findByCategory(ctx.params.category)
+            return ctx.helper.success(ctx, article)
+        } catch (err) {
+            console.log(err)
             return ctx.helper.error(ctx, error_001[ 0 ], error_001[ 1 ])
         }
     }
