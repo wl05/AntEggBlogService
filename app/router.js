@@ -17,7 +17,7 @@ module.exports = app => {
     router.get('/articles/tags/:tag', controller.article.findByTag)
     router.get('/articles/category/:category', controller.article.findByCategory)
     
-    
+    /**/
     router.post('/img/upload', jwt, controller.images.upload)
     router.post('/categories', jwt, controller.categories.create)
     router.get('/categories', controller.categories.getCategories)
