@@ -9,15 +9,11 @@ module.exports = app => {
         },
         password : {
             type : String,
-            required : true
+            // required : true
         },
         role : {
             type : Number,
-            default : 1
-        },
-        avatar : {
-            type : String,
-            default : ''
+            default : 1 // 0： 普通用户，1，管理员
         },
         createAt : {
             type : Number,

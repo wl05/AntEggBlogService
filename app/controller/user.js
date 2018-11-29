@@ -1,6 +1,6 @@
 const struct = require('superstruct').struct
 const Controller = require('egg').Controller
-const {error_001, error_002, error_003} = require("../common/common")
+const {error_001, error_002, error_003, error_004} = require("../common/common")
 const {user_001} = require("../common/user")
 
 class User extends Controller {
@@ -33,6 +33,8 @@ class User extends Controller {
             const user = await service.user.findOne(ctx.request.body)
             if (!user) {
                 return ctx.helper.error(ctx, user_001[ 0 ], user_001[ 0 ])
+            } else if (user.role !== 1) {
+                return ctx.helper.error(ctx, error_004[ 0 ], error_004[ 1 ])
             } else {
                 let token = service.user.createToken({id : user.id})
                 await service.user.updateById(user.id, {updatedAt : Date.now()})

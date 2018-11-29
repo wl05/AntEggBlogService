@@ -1,5 +1,6 @@
+use 'strict';
 module.exports = app => {
-    const {router, controller} = app;
+    const { router, controller } = app;
     const jwt = app.middleware.jwt();
     router.post('/login', controller.user.login);
     router.get('/', controller.home.index);
@@ -16,14 +17,13 @@ module.exports = app => {
     router.delete('/articles/:id', jwt, controller.article.deleteArticle);
     router.get('/articles/tags/:tag', controller.article.findByTag);
     router.get('/articles/category/:category', controller.article.findByCategory);
-    
+
     /* upload*/
     router.post('/img/upload', jwt, controller.images.upload);
     router.post('/categories', jwt, controller.categories.create);
     router.get('/categories', controller.categories.getCategories);
     router.get('/categories/count', controller.categories.getAggregateCategories);
-    
+
     router.put('/categories/:id', jwt, controller.categories.findByIdAndUpdate);
     router.delete('/categories/:id', jwt, controller.categories.deleteCategory);
-   
-};
+}

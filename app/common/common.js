@@ -12,3 +12,8 @@ module.exports.error_003 = [
     "error_003",
     "invalid signature"
 ]
+
+module.exports.error_004 = [
+    "error_004",
+    "no permission"
+]

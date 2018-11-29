@@ -28,7 +28,6 @@ class Categories extends Controller {
         const {ctx, service} = this
         try {
             const categories = await service.categories.find()
-            // const categories = await service.article.aggregateCategories()
             return ctx.helper.success(ctx, categories)
         } catch (err) {
             console.log(err)

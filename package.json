@@ -4,6 +4,7 @@
     "description": "",
     "private": true,
     "dependencies": {
+        "axios": "^0.18.0",
         "egg": "^2.2.1",
         "egg-cors": "^2.1.1",
         "egg-mongoose": "^3.1.0",

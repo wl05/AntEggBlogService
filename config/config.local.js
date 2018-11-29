@@ -4,4 +4,3 @@ exports.mongoose = {
         options : {},
     },
 }
-
