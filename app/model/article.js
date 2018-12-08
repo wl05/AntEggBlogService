@@ -56,7 +56,7 @@ module.exports = app => {
             enum : [ '0', '1', '2' ], // 0存在 1更新，2 删除
             default : '0'
         }
-    });
+    }, {versionKey : false});
     
     return mongoose.model('Article', ArticleSchema);
 }

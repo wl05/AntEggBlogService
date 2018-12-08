@@ -9,6 +9,8 @@ module.exports = app => {
     router.put('/tags/:id', jwt, controller.tags.findByIdAndUpdate);
     router.delete('/tags/:id', jwt, controller.tags.deleteTag);
     router.get('/user', jwt, controller.user.getUserInfo);
+    router.put('/user', jwt, controller.user.editUserInfo);
+    router.get('/users', jwt, controller.user.getUserList);
     router.post('/articles', jwt, controller.article.create);
     router.get('/articles', controller.article.getArticles);
     router.get('/articles/:_id', controller.article.getArticle);
@@ -16,14 +18,12 @@ module.exports = app => {
     router.delete('/articles/:id', jwt, controller.article.deleteArticle);
     router.get('/articles/tags/:tag', controller.article.findByTag);
     router.get('/articles/category/:category', controller.article.findByCategory);
-    
     /* upload*/
     router.post('/img/upload', jwt, controller.images.upload);
     router.post('/categories', jwt, controller.categories.create);
     router.get('/categories', controller.categories.getCategories);
     router.get('/categories/count', controller.categories.getAggregateCategories);
-    
     router.put('/categories/:id', jwt, controller.categories.findByIdAndUpdate);
     router.delete('/categories/:id', jwt, controller.categories.deleteCategory);
-   
+    
 };

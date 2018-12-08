@@ -1,12 +1,27 @@
 # AntEggBlogService
 
+> Vue.js+Egg.js+Mongodb的前后端分离的个人博客。
 
+> 博客地址：[ANT](http://120.77.219.106/#/)
+
+## 主要技术栈
+* egg、mongoose、jwt鉴权
 
 ## QuickStart
 
-<!-- add docs here for user -->
-
-see [egg docs][egg] for more detail.
+克隆远程库
+```bash
+git clone git@github.com:antbaobao/AntEggBlogService.git
+```
+安装依赖
+```bash
+cd AntEggBlogService
+npm i
+```
+运行
+```bash
+npm run dev
+```
 
 ### Development
 
@@ -18,16 +33,4 @@ $ open http://localhost:7001/
 
 ### Deploy
 
-```bash
-$ npm start
-$ npm stop
-```
-
-### npm scripts
-
-- Use `npm run lint` to check code style.
-- Use `npm test` to run unit test.
-- Use `npm run autod` to auto detect dependencies upgrade, see [autod](https://www.npmjs.com/package/autod) for more detail.
-
-
-[egg]: https://eggjs.org
+关于部署参考另一篇博客。

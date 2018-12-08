@@ -2,7 +2,6 @@ const struct = require('superstruct').struct
 const Controller = require('egg').Controller
 const {error_001, error_002} = require("../common/common")
 
-
 class Article extends Controller {
     // create tag
     async create () {
