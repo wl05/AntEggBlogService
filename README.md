@@ -33,4 +33,5 @@ $ open http://localhost:7001/
 
 ### Deploy
 
-关于部署参考另一篇博客。
+使用docker分别建立启用mongo和后端，具体有空分享。
+待续。。。
