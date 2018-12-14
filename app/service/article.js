@@ -56,7 +56,7 @@ class ArticleService extends Service {
         return await this.ctx.model.Article.find({tag, status : {$ne : '2'}}, {
             publishAt : 1,
             title : 1
-        })
+        }).sort({'publishAt' : -1})
     }
     
     async findByCategory (category) {
