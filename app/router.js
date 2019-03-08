@@ -18,6 +18,9 @@ module.exports = app => {
     router.delete('/articles/:id', jwt, controller.article.deleteArticle);
     router.get('/articles/tags/:tag', controller.article.findByTag);
     router.get('/articles/category/:category', controller.article.findByCategory);
+    router.get('/archives',controller.article.archives)
+    router.get('/archives/:timeline',controller.article.findByArchive)
+    
     /* upload*/
     router.post('/img/upload', jwt, controller.images.upload);
     router.post('/categories', jwt, controller.categories.create);

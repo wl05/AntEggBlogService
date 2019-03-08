@@ -60,7 +60,6 @@ class Article extends Controller {
             pageLimit : 'string?',
             publishStatus : 'string?'
         })
-        
         try {
             validator(ctx.request.query)
         } catch (err) {
@@ -173,6 +172,44 @@ class Article extends Controller {
         }
     }
     
+    async archives () {
+        const {ctx, service} = this
+        try {
+            const _archives = await service.article.aggregateArchives()
+            return ctx.helper.success(ctx, _archives)
+        } catch (err) {
+            console.log(err)
+            return ctx.helper.error(ctx, error_001[ 0 ], error_001[ 1 ])
+        }
+    }
+    
+    async findByArchive () {
+        const {ctx, service} = this
+        const validatorParams = struct({
+            timeline : 'string'
+        })
+        try {
+            validatorParams(ctx.params)
+        } catch (err) {
+            return ctx.helper.error(ctx, error_002[ 0 ], error_002[ 1 ])
+        }
+        const date = (new Date(ctx.params.timeline))
+        if (typeof date.getTime() !== 'number') {
+            return ctx.helper.error(ctx, error_002[ 0 ], error_002[ 1 ])
+        }
+        let start = date.getTime(),
+            month = date.getMonth() === 11 ? 1 : date.getMonth() + 2,
+            year = date.getMonth() === 11 ? date.getFullYear() + 1 : date.getFullYear(),
+            endTimeline = `${year}-${month}`,
+            end = (new Date(endTimeline)).getTime()
+        try {
+            const _archives = await service.article.findByArchive(start, end)
+            return ctx.helper.success(ctx, _archives)
+        } catch (err) {
+            console.log(err)
+            return ctx.helper.error(ctx, error_001[ 0 ], error_001[ 1 ])
+        }
+    }
 }
 
 module.exports = Article

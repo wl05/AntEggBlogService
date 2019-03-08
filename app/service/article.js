@@ -26,7 +26,7 @@ class ArticleService extends Service {
         pageSize = pageSize ? Number(pageSize) : 0
         pageLimit = pageLimit ? Number(pageLimit) : 0
         const count = await this.count()
-        const article = await this.ctx.model.Article.find({...condition, status : {$ne : '2'}})
+        const article = await this.ctx.model.Article.find({...condition, status : {$ne : 2}})
             .populate('tag', "name")
             .populate('creator', "name")
             .populate('category', "name")
@@ -60,10 +60,10 @@ class ArticleService extends Service {
     }
     
     async findByCategory (category) {
-        return await this.ctx.model.Article.find({category, status : {$ne : '2'}}, {
-            publishAt : 1,
-            title : 1
-        }).sort({'publishAt' : -1})
+        return await this.ctx.model.Article.find({category, status : {$ne : '2'}})
+            .populate('tag', "name")
+            .populate('creator', "name")
+            .populate('category', "name").sort({'publishAt' : -1})
     }
     
     async updateViewCount (_id) {
@@ -74,7 +74,34 @@ class ArticleService extends Service {
         })
     }
     
+    async aggregateArchives () {
+        return await this.ctx.model.Article.aggregate([
+                {
+                    "$group" : {
+                        "_id" : {
+                            "$dateToString" : {
+                                "format" : "%Y-%m",
+                                "date" : {
+                                    "$add" : [
+                                        new Date(0),
+                                        {"$multiply" : [ 1, "$publishAt" ]}
+                                    ]
+                                }
+                            }
+                        },
+                        "count" : {"$sum" : 1}
+                    }
+                }
+            ]
+        )
+    }
     
+    async findByArchive (start,end) {
+        return await this.ctx.model.Article.find({"publishAt" : { $gt: start, $lt: end } , status : {$ne : '2'}})
+            .populate('tag', "name")
+            .populate('creator', "name")
+            .populate('category', "name").sort({'publishAt' : -1})
+    }
 }
 
 
