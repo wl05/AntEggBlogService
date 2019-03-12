@@ -67,6 +67,8 @@ class Tags extends Controller {
                 status : "1"
             }
             const tags = await service.tags.findByIdAndUpdate(ctx.params.id, updatingContent)
+            const tag_detail = await service.tags.findById(ctx.params.id)
+            await service.article.updateManyByCategoryId(ctx.params.id, {$set : {tag_detail}})
             return ctx.helper.success(ctx, tags)
         } catch (err) {
             return ctx.helper.error(ctx, error_001[ 0 ], error_001[ 1 ])

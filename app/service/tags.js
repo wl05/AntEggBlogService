@@ -9,6 +9,10 @@ class TagsService extends Service {
         return await this.ctx.model.Tags.find({...condition, status : {$ne : '2'}})
     }
     
+    async findById (id) {
+        return await this.ctx.model.Tags.findById(id)
+    }
+    
     async findByIdAndUpdate (_id, content) {
         return await this.ctx.model.Tags.findByIdAndUpdate({_id, status : {$ne : '2'}}, {$set : content})
     }

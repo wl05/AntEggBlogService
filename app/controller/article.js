@@ -24,6 +24,10 @@ class Article extends Controller {
         try {
             let content = {...ctx.request.body}
             content.creator = ctx.id
+            const tag_detail = await service.tags.findById(content.tag)
+            const category_detail = await service.categories.findById(content.category)
+            content.tag_detail = tag_detail
+            content.category_detail = category_detail
             const article = await service.article.create(content)
             return ctx.helper.success(ctx, article)
         } catch (err) {
@@ -68,10 +72,14 @@ class Article extends Controller {
         
         try {
             const article = await service.article.find(ctx.request.query)
+            // for (let val of article.article) {
+            //     const tag_detail = await service.tags.findById(val.tag)
+            //     const category_detail = await service.categories.findById(val.category)
+            //     await service.article.findByIdAndUpdate(val._id, {tag_detail, category_detail})
+            // }
             return ctx.helper.success(ctx, article)
         } catch (err) {
             console.log(err)
-            
             return ctx.helper.error(ctx, error_001[ 0 ], error_001[ 1 ])
         }
     }
@@ -102,8 +110,23 @@ class Article extends Controller {
                 updatedAt : Date.now(),
                 status : '1'
             }
-            const categories = await service.article.findByIdAndUpdate(ctx.params._id, updatingContent)
-            return ctx.helper.success(ctx, categories)
+            let tag_detail = null, category_detail = null
+            if (ctx.request.body.tag) {
+                tag_detail = await service.tags.findById(ctx.request.body.tag)
+                if (!tag_detail) {
+                    throw new Error('Not found tag')
+                }
+                updatingContent.tag_detail = tag_detail
+            }
+            if (ctx.request.body.category) {
+                category_detail = await service.categories.findById(ctx.request.body.category)
+                if (!tag_detail) {
+                    throw new Error('Not found category')
+                }
+                updatingContent.category_detail = category_detail
+            }
+            const article = await service.article.findByIdAndUpdate(ctx.params._id, updatingContent)
+            return ctx.helper.success(ctx, article)
         } catch (err) {
             console.log(err)
             return ctx.helper.error(ctx, error_001[ 0 ], error_001[ 1 ])
@@ -156,15 +179,20 @@ class Article extends Controller {
     async findByCategory () {
         const {ctx, service} = this
         const validatorParams = struct({
-            category : 'string'
+            category : 'string',
+        })
+        const validatorQuery = struct({
+            pageSize : 'string?',
+            pageLimit : 'string?'
         })
         try {
             validatorParams(ctx.params)
+            validatorQuery(ctx.query)
         } catch (err) {
             return ctx.helper.error(ctx, error_002[ 0 ], error_002[ 1 ])
         }
         try {
-            const article = await service.article.findByCategory(ctx.params.category)
+            const article = await service.article.findByCategory(ctx.params.category, ctx.query.pageSize, ctx.query.pageLimit)
             return ctx.helper.success(ctx, article)
         } catch (err) {
             console.log(err)
@@ -188,8 +216,13 @@ class Article extends Controller {
         const validatorParams = struct({
             timeline : 'string'
         })
+        const validatorQuery = struct({
+            pageSize : 'string?',
+            pageLimit : 'string?'
+        })
         try {
             validatorParams(ctx.params)
+            validatorQuery(ctx.query)
         } catch (err) {
             return ctx.helper.error(ctx, error_002[ 0 ], error_002[ 1 ])
         }
@@ -203,7 +236,7 @@ class Article extends Controller {
             endTimeline = `${year}-${month}`,
             end = (new Date(endTimeline)).getTime()
         try {
-            const _archives = await service.article.findByArchive(start, end)
+            const _archives = await service.article.findByArchive(start, end, ctx.query.pageSize, ctx.query.pageLimit)
             return ctx.helper.success(ctx, _archives)
         } catch (err) {
             console.log(err)

@@ -69,6 +69,8 @@ class Categories extends Controller {
                 status : "1"
             }
             const categories = await service.categories.findByIdAndUpdate(ctx.params.id, updatingContent)
+            const category_detail = await service.categories.findById(ctx.params.id)
+            await service.article.updateManyByCategoryId(ctx.params.id, {$set : {category_detail}})
             return ctx.helper.success(ctx, categories)
         } catch (err) {
             return ctx.helper.error(ctx, error_001[ 0 ], error_001[ 1 ])

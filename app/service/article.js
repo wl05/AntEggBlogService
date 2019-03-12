@@ -5,8 +5,8 @@ class ArticleService extends Service {
         return await this.ctx.model.Article.create(content)
     }
     
-    async count () {
-        return await this.ctx.model.Article.countDocuments({status : {$ne : '2'}})
+    async count (condition) {
+        return await this.ctx.model.Article.countDocuments(condition)
     }
     
     async findByIdAndUpdate (_id, content) {
@@ -25,11 +25,8 @@ class ArticleService extends Service {
         }
         pageSize = pageSize ? Number(pageSize) : 0
         pageLimit = pageLimit ? Number(pageLimit) : 0
-        const count = await this.count()
+        const count = await this.count({status : {$ne : '2'}})
         const article = await this.ctx.model.Article.find({...condition, status : {$ne : 2}})
-            .populate('tag', "name")
-            .populate('creator', "name")
-            .populate('category', "name")
             .skip((pageSize - 1) * pageLimit)
             .limit(pageLimit)
             .sort({'publishAt' : -1})
@@ -44,12 +41,12 @@ class ArticleService extends Service {
             .populate('creator', "name")
     }
     
-    async updateManyByTagId (id) {
-        return await this.ctx.model.Article.updateMany({tag : id}, {$set : {status : 2}})
+    async updateManyByTagId (id, newContent = {$set : {status : 2}}) {
+        return await this.ctx.model.Article.updateMany({tag : id}, newContent)
     }
     
-    async updateManyByCategoryId (id) {
-        return await this.ctx.model.Article.updateMany({category : id}, {$set : {status : 2}})
+    async updateManyByCategoryId (id, newContent = {$set : {status : 2}}) {
+        return await this.ctx.model.Article.updateMany({category : id}, newContent)
     }
     
     async findByTag (tag) {
@@ -59,11 +56,16 @@ class ArticleService extends Service {
         }).sort({'publishAt' : -1})
     }
     
-    async findByCategory (category) {
-        return await this.ctx.model.Article.find({category, status : {$ne : '2'}})
-            .populate('tag', "name")
-            .populate('creator', "name")
-            .populate('category', "name").sort({'publishAt' : -1})
+    async findByCategory (category, pageSize, pageLimit) {
+        pageSize = pageSize ? Number(pageSize) : 0
+        pageLimit = pageLimit ? Number(pageLimit) : 0
+        const condition = {category, status : {$ne : '2'}}
+        const count = await this.count(condition)
+        const article = await this.ctx.model.Article.find(condition)
+            .skip((pageSize - 1) * pageLimit)
+            .limit(pageLimit)
+            .sort({'publishAt' : -1})
+        return {count, article, pageSize, pageLimit}
     }
     
     async updateViewCount (_id) {
@@ -96,11 +98,16 @@ class ArticleService extends Service {
         )
     }
     
-    async findByArchive (start,end) {
-        return await this.ctx.model.Article.find({"publishAt" : { $gt: start, $lt: end } , status : {$ne : '2'}})
-            .populate('tag', "name")
-            .populate('creator', "name")
-            .populate('category', "name").sort({'publishAt' : -1})
+    async findByArchive (start, end, pageSize, pageLimit) {
+        pageSize = pageSize ? Number(pageSize) : 0
+        pageLimit = pageLimit ? Number(pageLimit) : 0
+        const condition = {"publishAt" : {$gt : start, $lt : end}, status : {$ne : '2'}}
+        const count = await this.count(condition)
+        const article = await this.ctx.model.Article.find(condition)
+            .skip((pageSize - 1) * pageLimit)
+            .limit(pageLimit)
+            .sort({'publishAt' : -1})
+        return {count, article, pageSize, pageLimit}
     }
 }
 

@@ -12,9 +12,17 @@ module.exports = app => {
             ref : 'Tags',
             required : true
         },
+        tag_detail : {
+            type : Object,
+            required : true
+        },
         category : {
             type : Schema.ObjectId,
             ref : 'Categories',
+            required : true
+        },
+        category_detail : {
+            type : Object,
             required : true
         },
         creator : {

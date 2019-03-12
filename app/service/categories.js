@@ -8,8 +8,9 @@ class CategoriesService extends Service {
     async find () {
         return await this.ctx.model.Categories.find({status : {$ne : '2'}})
     }
-    
-    
+    async findById (id) {
+        return await this.ctx.model.Categories.findById(id)
+    }
     async findByIdAndUpdate (_id, content) {
         return await this.ctx.model.Categories.findByIdAndUpdate({_id, status : {$ne : '2'}}, {$set : content})
     }
