@@ -26,7 +26,10 @@ class ArticleService extends Service {
         pageSize = pageSize ? Number(pageSize) : 0
         pageLimit = pageLimit ? Number(pageLimit) : 0
         const count = await this.count({status : {$ne : '2'}})
-        const article = await this.ctx.model.Article.find({...condition, status : {$ne : 2}})
+        const article = await this.ctx.model.Article.find({...condition, status : {$ne : 2}}, {
+            markdownValue : 0,
+            htmlValue : 0
+        })
             .skip((pageSize - 1) * pageLimit)
             .limit(pageLimit)
             .sort({'publishAt' : -1})
