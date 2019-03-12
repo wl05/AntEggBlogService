@@ -72,11 +72,11 @@ class Article extends Controller {
         
         try {
             const article = await service.article.find(ctx.request.query)
-            // for (let val of article.article) {
-            //     const tag_detail = await service.tags.findById(val.tag)
-            //     const category_detail = await service.categories.findById(val.category)
-            //     await service.article.findByIdAndUpdate(val._id, {tag_detail, category_detail})
-            // }
+            for (let val of article.article) {
+                const tag_detail = await service.tags.findById(val.tag)
+                const category_detail = await service.categories.findById(val.category)
+                await service.article.findByIdAndUpdate(val._id, {tag_detail, category_detail})
+            }
             return ctx.helper.success(ctx, article)
         } catch (err) {
             console.log(err)
