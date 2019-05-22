@@ -261,7 +261,6 @@ class Article extends Controller {
       const article = await service.article.findByKeywords(ctx.query.keywords.trim(), ctx.query.pageSize, ctx.query.pageLimit);
       return ctx.helper.success(ctx, article);
     } catch (err) {
-      // console.log(err);
       return ctx.helper.error(ctx, error_001[ 0 ], error_001[ 1 ]);
     }
   }

@@ -40,6 +40,9 @@ class ArticleService extends Service {
     return await this.ctx.model.Article.findOne({
       ...condition,
       status: { $ne: '2' }
+    }, {
+      markdownValue: 0,
+      creator: 0
     })
       .populate('category', 'name')
       .populate('tag', 'name')
