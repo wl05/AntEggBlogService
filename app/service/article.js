@@ -105,9 +105,11 @@ class ArticleService extends Service {
             },
             'count': { '$sum': 1 }
           }
-        }
+        },
+        { $sort: { 'publishAt': -1 } }
       ]
     );
+
   }
 
   async findByArchive(start, end, pageSize, pageLimit) {
