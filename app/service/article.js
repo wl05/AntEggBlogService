@@ -106,7 +106,7 @@ class ArticleService extends Service {
             'count': { '$sum': 1 }
           }
         },
-        { $sort: { 'publishAt': -1 } }
+        { $sort: { '_id': -1 } }
       ]
     );
 
