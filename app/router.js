@@ -1,7 +1,7 @@
 module.exports = app => {
   const { router, controller } = app;
   const jwt = app.middleware.jwt();
-  router.post('/login', controller.user.login);
+  router.post('/admin/login', controller.user.login);
   router.get('/', controller.home.index);
   router.post('/tags', jwt, controller.tags.create);
   router.get('/tags', controller.tags.get);
@@ -21,13 +21,13 @@ module.exports = app => {
   router.get('/articles/category/:category', controller.article.findByCategory);
   router.get('/archives', controller.article.archives);
   router.get('/archives/:timeline', controller.article.findByArchive);
-
-  /* upload*/
-  router.post('/img/upload', jwt, controller.images.upload);
+  router.post('/img/upload', jwt, controller.images.upload); // upload
   router.post('/categories', jwt, controller.categories.create);
   router.get('/categories', controller.categories.getCategories);
   router.get('/categories/count', controller.categories.getAggregateCategories);
   router.put('/categories/:id', jwt, controller.categories.findByIdAndUpdate);
   router.delete('/categories/:id', jwt, controller.categories.deleteCategory);
+  router.get('/authcode', controller.user.generateAuthCode);
+  router.post('/signup', controller.user.signup);
 
 };
