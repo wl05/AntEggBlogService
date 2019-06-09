@@ -5,7 +5,7 @@
 > 博客地址：[ANT](http://120.77.219.106/#/)
 
 ## 主要技术栈
-* egg、mongoose、jwt鉴权
+* egg、mongoose、jwt鉴权、redis
 
 ## QuickStart
 
