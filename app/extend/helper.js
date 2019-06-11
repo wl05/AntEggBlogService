@@ -1,4 +1,6 @@
 const nodemailer = require('nodemailer');
+const { error_002 } = require('../common/common');
+
 
 // success
 exports.success = (ctx, result = null, message = 'Succeed') => {
@@ -46,7 +48,7 @@ exports.sendUserEmail = (ctx, toEmail) => {
     }
   };
   const transporter = nodemailer.createTransport(config_email);
-  const html = '感谢您的注册，请点击下面的链接激活您的账号，如果链接在邮箱中打不开，您可以试试将其复制到浏览器地址栏中<div>' + ctx.app.config.baseUrl + '?code=' + code + '&account=' + toEmail + '</div>';
+  const html = '感谢您的注册，请点击下面的链接激活您的账号，如果链接在邮箱中打不开，您可以试试将其复制到浏览器地址栏中<div>' + ctx.app.config.baseUrl + '/activation?code=' + code + '&account=' + toEmail + '</div>';
   const data = {
     from: '2929712050@qq.com', // 发件地址
     to: toEmail, // 收件人

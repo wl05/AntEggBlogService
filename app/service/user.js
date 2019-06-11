@@ -35,6 +35,7 @@ class UserService extends Service {
     return await this.ctx.model.User.updateOne({ _id }, { $set: data });
   }
 
+
   createToken(data) {
     return jwt.sign(data, this.app.config.jwt.secret, { expiresIn: '12h' });
   }

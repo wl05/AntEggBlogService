@@ -29,6 +29,11 @@ module.exports = app => {
       type: Number,
       default: 1, // 0： 普通用户，1，管理员
     },
+    activated: {
+      type: String,
+      enum: [ '0', '1' ], // 0待激活 1已激活
+      default: '0'
+    },
     createAt: {
       type: Number,
       default: Date.now
