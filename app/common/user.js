@@ -32,3 +32,20 @@ module.exports.user_007 = [
   'user_007',
   '邮件已注册'
 ];
+
+
+module.exports.user_008 = [
+  'user_008',
+  '邮箱未注册'
+];
+
+module.exports.user_009 = [
+  'user_009',
+  '邮箱未激活，请激活邮箱'
+];
+
+module.exports.user_010 = [
+  'user_010',
+  '邮箱或密码错误'
+];
+

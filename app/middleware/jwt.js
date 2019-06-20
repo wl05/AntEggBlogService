@@ -1,22 +1,41 @@
-const {error_003} = require("../common/common")
+const { error_003, error_005, error_001 } = require('../common/common');
 
 module.exports = () => {
-    const jwt = require('jsonwebtoken')
-    return async (ctx, next) => {
-        let bearerToken = ctx.headers.authorization,
-            decoded = null,
-            token = bearerToken && bearerToken.replace("Bearer ", "")
-        try {
-            decoded = jwt.verify(token, ctx.app.config.jwt.secret)
-        } catch (err) {
-            ctx.body = {
-                code : error_003[ 0 ],
-                message : error_003[ 1 ]
-            }
-            ctx.status = 200
-            return
+  return async (ctx, next) => {
+    let bearerToken = ctx.headers.authorization,
+      userInfo = null,
+      token = bearerToken && bearerToken.replace('Bearer ', '');
+    if (token) {
+      try {
+        userInfo = await ctx.app.redis.get(`${token}`);
+        if (!userInfo) {
+          ctx.body = {
+            code: error_005[ 0 ],
+            message: error_005[ 1 ]
+          };
+          ctx.status = 200;
+        } else {
+          userInfo = JSON.parse(userInfo);
+          ctx.id = userInfo.id;
+          await next();
         }
-        ctx.id = decoded.id
-        await next()
+      } catch (err) {
+        console.log(err);
+        ctx.body = {
+          code: error_001[ 0 ],
+          message: error_001[ 1 ]
+        };
+        ctx.status = 200;
+        return;
+      }
+
+    } else {
+      // 如果token为空，则代表客户没有登录
+      ctx.body = {
+        code: error_005[ 0 ],
+        message: error_005[ 1 ]
+      };
+      ctx.status = 200;
     }
-}
+  };
+};

@@ -1,7 +1,7 @@
 module.exports = app => {
   const { router, controller } = app;
   const jwt = app.middleware.jwt();
-  router.post('/admin/login', controller.user.login);
+  router.post('/login', controller.user.login);
   router.get('/', controller.home.index);
   router.post('/tags', jwt, controller.tags.create);
   router.get('/tags', controller.tags.get);
@@ -12,7 +12,7 @@ module.exports = app => {
   router.put('/user', jwt, controller.user.editUserInfo);
   router.get('/users', jwt, controller.user.getUserList);
   router.post('/articles', jwt, controller.article.create);
-  router.get('/articles', controller.article.getArticles);
+  router.get('/articles', jwt, controller.article.getArticles);
   router.get('/articles/keywords', controller.article.findByKeyWords);
   router.get('/articles/:_id', controller.article.getArticle);
   router.put('/articles/:_id', jwt, controller.article.findByIdAndUpdate);
@@ -29,6 +29,6 @@ module.exports = app => {
   router.delete('/categories/:id', jwt, controller.categories.deleteCategory);
   router.get('/authcode', controller.user.generateAuthCode);
   router.post('/signup', controller.user.signup);
-  router.get('/activation',controller.user.userActivation)
+  router.get('/activation', controller.user.userActivation);
 
 };
