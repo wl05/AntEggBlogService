@@ -1,5 +1,6 @@
 // mongodb用户名密码配置文件需要自己建，我是在服务器上自己建的
 const mongoConfig = require('./mongoConfig');
+// redis配置文件需要自己建，我是在服务器上自己建的
 const redisConfig = require('./redisConfig');
 exports.mongoose = {
   client: {
@@ -13,7 +14,7 @@ exports.mongoose = {
 exports.redis = {
   client: {
     port: 6379, // Redis port
-    host: '127.0.0.1', // Redis host
+    host: '120.77.219.106', // Redis host
     password: redisConfig.password,
     db: 0,
   },
