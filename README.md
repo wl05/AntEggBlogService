@@ -34,3 +34,8 @@ npm run dev
 ```bash
 sh DokcerBash.sh
 ```
+
+
+## [1.0] - 2019-6-20
+### Added
+- 完成版本1.0
