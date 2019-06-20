@@ -1,12 +1,11 @@
 const struct = require('superstruct').struct;
 const Controller = require('egg').Controller;
-const { error_001, error_002, error_003, error_004 } = require('../common/common');
-const { user_001, user_002, user_003, user_004, user_005, user_006, user_007, user_008, user_009, user_010 } = require('../common/user');
+const { error_001, error_002, error_003 } = require('../common/common');
+const { user_002, user_003, user_004, user_005, user_006, user_007, user_008, user_009, user_010 } = require('../common/user');
 const sha1 = require('sha1');
 const rand = require('csprng');
 const svgCaptcha = require('svg-captcha');
 const crypto = require('crypto');
-
 
 class User extends Controller {
 
@@ -180,7 +179,6 @@ class User extends Controller {
       email: 'string',
       password: 'string'
     });
-
     try {
       validator(ctx.request.body);
     } catch (err) {
@@ -189,23 +187,19 @@ class User extends Controller {
 
     try {
       const { email, password } = ctx.request.body;
-      const user = await service.user.findOne({ email });//验证用户是否已注册
-
+      const user = await service.user.findDetail({ email });//验证用户是否已注册
       if (!user) {
         return ctx.helper.error(ctx, user_008[ 0 ], user_008[ 1 ]);
       }
-      const res = await service.user.findOne({ email, password: sha1(password + user.salt) }); // 验证用户
+      const res = await service.user.findDetail({ email, password: sha1(password + user.salt) }); // 验证用户
       if (!res) {
         return ctx.helper.error(ctx, user_010[ 0 ], user_010[ 1 ]);
       }
-
       if (user.activated === '0') { // 邮箱未激活
         return ctx.helper.error(ctx, user_009[ 0 ], user_009[ 1 ]);
       } else if (user.activated === '1') {
-
         const token = crypto.randomBytes(16)
           .toString('hex'); // 产生随机token
-
         const tokenContent = {
           email: user.email,
           name: user.name,
@@ -219,10 +213,9 @@ class User extends Controller {
           _id: user._id,
           token
         });
-        return;
       }
     } catch (error) {
-      console.log(e);
+      console.log(error);
       return ctx.helper.error(ctx, error_001[ 0 ], error_001[ 1 ]);
     }
   }

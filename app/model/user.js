@@ -66,7 +66,13 @@ function initialize(User) {
       console.log('initialize failed');
     } else if (!doc.length) {
       const salt = rand(160, 36);
-      new User({ name: 'admin', password: sha1('admin' + salt), salt: salt }).save();
+      new User({
+        activated: 1,
+        email: '2929712050@qq.com',
+        name: 'admin',
+        password: sha1('admin' + salt),
+        salt: salt
+      }).save();
     } else {
       console.log('initialize successfully');
     }

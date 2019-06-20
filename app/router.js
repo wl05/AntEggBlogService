@@ -12,7 +12,7 @@ module.exports = app => {
   router.put('/user', jwt, controller.user.editUserInfo);
   router.get('/users', jwt, controller.user.getUserList);
   router.post('/articles', jwt, controller.article.create);
-  router.get('/articles', jwt, controller.article.getArticles);
+  router.get('/articles', controller.article.getArticles);
   router.get('/articles/keywords', controller.article.findByKeyWords);
   router.get('/articles/:_id', controller.article.getArticle);
   router.put('/articles/:_id', jwt, controller.article.findByIdAndUpdate);
@@ -30,5 +30,4 @@ module.exports = app => {
   router.get('/authcode', controller.user.generateAuthCode);
   router.post('/signup', controller.user.signup);
   router.get('/activation', controller.user.userActivation);
-
 };

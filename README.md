@@ -19,19 +19,18 @@ cd AntEggBlogService
 npm i
 ```
 运行
+
+1. 安装redis并启动
+关于redis的安装与运行可以参考[这里](https://github.com/antbaobao/AntBlog/issues/42)
+2. 安装mongodb并启动
+3. 开发
 ```bash
 npm run dev
 ```
+访问http://localhost:7001/
 
-### Development
+部署
 
 ```bash
-$ npm i
-$ npm run dev
-$ open http://localhost:7001/
+sh DokcerBash.sh
 ```
-
-### Deploy
-
-使用docker分别建立启用mongo和后端，具体有空分享。
-待续。。。

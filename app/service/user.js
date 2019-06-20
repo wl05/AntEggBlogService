@@ -5,28 +5,31 @@ class UserService extends Service {
     return await this.ctx.model.User.create(info);
   }
 
-  async findByName(condition) {
-    return await this.ctx.model.User.findOne(condition);
-  }
-
   async findOne(condition) {
     return await this.ctx.model.User.findOne(condition, {
       password: 0,
-      salt: 0
+      salt: 0,
+      activated: 0
     });
+  }
+
+  async findDetail(condition) {
+    return await this.ctx.model.User.findOne(condition);
   }
 
   async findById(_id) {
     return await this.ctx.model.User.findById({ _id }, {
       password: 0,
-      salt: 0
+      salt: 0,
+      activated: 0
     });
   }
 
   async find() {
     return await this.ctx.model.User.find({}, {
       password: 0,
-      salt: 0
+      salt: 0,
+      activated: 0
     });
   }
 
