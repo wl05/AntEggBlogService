@@ -8,22 +8,22 @@ module.exports = appInfo => {
   config.keys = appInfo.name + '_1540997103739_7974';
   config.static = {
     prefix: '/public/',
-    dir: path.join(appInfo.baseDir, 'app/public')
+    dir: path.join(appInfo.baseDir, 'app/public'),
   };
 
   // add your config here
   config.middleware = [];
   // jwt
   config.jwt = {
-    secret: 'my.secret.my.secret.my.secret.my.secret'
+    secret: 'my.secret.my.secret.my.secret.my.secret',
   };
   // config cors
   config.security = {
     csrf: {
       enable: false,
-      ignoreJSON: false
+      ignoreJSON: false,
     },
-    domainWhiteList: [ '*' ]
+    domainWhiteList: [ '*' ],
   };
   // config cors
   config.cors = {
@@ -32,11 +32,11 @@ module.exports = appInfo => {
   };
   // config session
   config.session = {
-    key: 'SESSION_ID',  //key名字
+    key: 'SESSION_ID', // key名字
     maxAge: 1000 * 60 * 24,
     httpOnly: true,
-    encrypt: true, //加密
-    renew: true //最大时间范围内，刷新，自动增加最大时间
+    encrypt: true, // 加密
+    renew: true, // 最大时间范围内，刷新，自动增加最大时间
   };
   return config;
 };

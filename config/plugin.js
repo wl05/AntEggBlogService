@@ -9,12 +9,12 @@ exports.mongoose = {
 
 exports.cors = {
   enable: true,
-  package: 'egg-cors'
+  package: 'egg-cors',
 };
 
 exports.static = {
   enable: true,
-  package: 'egg-static'
+  package: 'egg-static',
 };
 
 exports.redis = {
