@@ -49,7 +49,9 @@
     "type": "git",
     "url": ""
   },
-  "eslintIgnore": ["coverage"],
+  "eslintIgnore": [
+    "coverage"
+  ],
   "author": "ant<2929712050@qq.com>",
   "license": "MIT"
 }
