@@ -1,41 +1,33 @@
-# AntEggBlogService
+# hackernews-async-ts
 
-> Vue.js+Egg.js+Mongodb的前后端分离的个人博客。
-
-> 博客地址：[ANT](http://120.77.219.106/#/)
-
-## 主要技术栈
-* egg、mongoose、jwt鉴权、redis
+[Hacker News](https://news.ycombinator.com/) showcase using typescript && egg
 
 ## QuickStart
 
-克隆远程库
-```bash
-git clone git@github.com:antbaobao/AntEggBlogService.git
-```
-安装依赖
-```bash
-cd AntEggBlogService
-npm i
-```
-运行
-
-1. 安装redis并启动
-关于redis的安装与运行可以参考[这里](https://github.com/antbaobao/AntBlog/issues/42)
-2. 安装mongodb并启动
-3. 开发
-```bash
-npm run dev
-```
-访问http://localhost:7001/
-
-部署
+### Development
 
 ```bash
-sh DokcerBash.sh
+$ npm i
+$ npm run dev
+$ open http://localhost:7001/
 ```
 
+Don't tsc compile at development mode, if you had run `tsc` then you need to `npm run clean` before `npm run dev`.
 
-## [1.0] - 2019-6-20
-### Added
-- 完成版本1.0
+### Deploy
+
+```bash
+$ npm run tsc
+$ npm start
+```
+
+### Npm Scripts
+
+- Use `npm run lint` to check code style
+- Use `npm test` to run unit test
+- se `npm run clean` to clean compiled js at development mode once
+
+### Requirement
+
+- Node.js 8.x
+- Typescript 2.8+
