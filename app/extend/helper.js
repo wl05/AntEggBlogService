@@ -1,7 +1,5 @@
 'use strict';
 const nodemailer = require('nodemailer');
-const { error_002 } = require('../common/common');
-
 
 // success
 exports.success = (ctx, result = null, message = 'Succeed') => {
@@ -26,12 +24,6 @@ exports.getIp = ctx => {
   return ctx.request.ip.replace(/::ffff:/, '');
 };
 
-
-/**
- * @param ctx
- * @param cnd
- * describe: sendUserEmail
- */
 exports.sendUserEmail = (ctx, toEmail) => {
   const expiraton = 1800;
   const code = require('crypto')

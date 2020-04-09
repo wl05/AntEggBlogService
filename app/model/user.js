@@ -56,10 +56,6 @@ module.exports = app => {
   return User;
 };
 
-/**
- * initialize user
- * @param User
- */
 function initialize(User) {
   User.find({}, (err, doc) => {
     if (err) {

@@ -1,11 +1,11 @@
 'use strict';
-const { error_003, error_005, error_001 } = require('../common/common');
+const { error_005, error_001 } = require('../common/common');
 
 module.exports = () => {
   return async (ctx, next) => {
-    let bearerToken = ctx.headers.authorization,
-      userInfo = null,
+    const bearerToken = ctx.headers.authorization,
       token = bearerToken && bearerToken.replace('Bearer ', '');
+    let userInfo = null;
     if (token) {
       try {
         userInfo = await ctx.app.redis.get(`${token}`);

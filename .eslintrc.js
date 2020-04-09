@@ -9,5 +9,6 @@ module.exports = {
     'space-before-function-paren': 0,
     'array-bracket-spacing': 0,
     'indent': ['error', 2]
-  }
+  },
+  "parser": "babel-eslint"
 }

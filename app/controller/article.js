@@ -6,7 +6,7 @@ class Article extends Controller {
   // create tag
   async create() {
     const { ctx, service } = this;
-    let validator = struct({
+    const validator = struct({
       title: 'string',
       tag: 'string',
       markdownValue: 'string?',
@@ -22,7 +22,7 @@ class Article extends Controller {
     }
 
     try {
-      let content = { ...ctx.request.body };
+      const content = ctx.request.body;
       content.creator = ctx.id;
       const tag_detail = await service.tags.findById(content.tag);
       const category_detail = await service.categories.findById(content.category);

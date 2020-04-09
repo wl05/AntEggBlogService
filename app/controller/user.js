@@ -138,7 +138,6 @@ class User extends Controller {
       account: 'string',
       code: 'string',
     });
-    console.log(ctx.request.query);
     try {
       validator(ctx.request.query);
     } catch (err) {
@@ -147,11 +146,13 @@ class User extends Controller {
     try {
       const codeVal = await app.redis.get(`${ctx.request.query.code}`); // 从redis中获取code的值
       if (!codeVal) { // code失效，请重新发送邮件激活
-        return ctx.body = user_006[1];
+        ctx.body = user_006[1];
+        return;
       }
       const email = ctx.request.query.account;
       if (codeVal !== email) { // 激活邮箱不一致
-        return ctx.body = user_005[1];
+        ctx.body = user_005[1];
+        return;
       }
       const user = await service.user.findOne({ email });// 验证用户是否已注册
       if (user) {
@@ -163,16 +164,10 @@ class User extends Controller {
         }
       }
     } catch (error) {
-      console.log(e);
       return ctx.helper.error(ctx, error_001[0], error_001[1]);
     }
   }
 
-  /**
-   * params:  {user_email,user_password,user_name}
-   * return:  users
-   * describe: user_login
-   **/
   async login() {
     const { ctx, service, app } = this;
     const validator = struct({
