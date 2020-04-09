@@ -1,3 +1,4 @@
+'use strict';
 const struct = require('superstruct').struct;
 const Controller = require('egg').Controller;
 const { error_001, error_002 } = require('../common/common');
@@ -13,7 +14,7 @@ class Article extends Controller {
       htmlValue: 'string?',
       publishAt: 'number',
       category: 'string',
-      publishStatus: struct.enum(['1', '2'])
+      publishStatus: struct.enum(['1', '2']),
     });
     try {
       validator(ctx.request.body);
@@ -37,8 +38,8 @@ class Article extends Controller {
 
   async getArticle() {
     const { ctx, service } = this;
-    let validator = struct({
-      _id: 'string'
+    const validator = struct({
+      _id: 'string',
     });
 
     try {
@@ -59,10 +60,10 @@ class Article extends Controller {
 
   async getArticles() {
     const { ctx, service } = this;
-    let validator = struct({
+    const validator = struct({
       pageSize: 'string?',
       pageLimit: 'string?',
-      publishStatus: 'string?'
+      publishStatus: 'string?',
     });
     try {
       validator(ctx.request.query);
@@ -72,7 +73,7 @@ class Article extends Controller {
 
     try {
       const article = await service.article.find(ctx.request.query);
-      for (let val of article.article) {
+      for (const val of article.article) {
         const tag_detail = await service.tags.findById(val.tag);
         const category_detail = await service.categories.findById(val.category);
         await service.article.findByIdAndUpdate(val._id, { tag_detail, category_detail });
@@ -87,7 +88,7 @@ class Article extends Controller {
   async findByIdAndUpdate() {
     const { ctx, service } = this;
     const validatorParams = struct({
-      _id: 'string'
+      _id: 'string',
     });
     const validatorBody = struct({
       title: 'string?',
@@ -108,7 +109,7 @@ class Article extends Controller {
       const updatingContent = {
         ...ctx.request.body,
         updatedAt: Date.now(),
-        status: '1'
+        status: '1',
       };
       let tag_detail = null,
         category_detail = null;
@@ -137,7 +138,7 @@ class Article extends Controller {
   async deleteArticle() {
     const { ctx, service } = this;
     const validator = struct({
-      id: 'string'
+      id: 'string',
     });
     try {
       validator(ctx.params);
@@ -148,7 +149,7 @@ class Article extends Controller {
     try {
       const updatingContent = {
         deletedAt: Date.now(),
-        status: '2'
+        status: '2',
       };
       const article = await service.article.findByIdAndUpdate(ctx.params.id, updatingContent);
 
@@ -161,7 +162,7 @@ class Article extends Controller {
   async findByTag() {
     const { ctx, service } = this;
     const validatorParams = struct({
-      tag: 'string'
+      tag: 'string',
     });
     try {
       validatorParams(ctx.params);
@@ -184,7 +185,7 @@ class Article extends Controller {
     });
     const validatorQuery = struct({
       pageSize: 'string?',
-      pageLimit: 'string?'
+      pageLimit: 'string?',
     });
     try {
       validatorParams(ctx.params);
@@ -215,11 +216,11 @@ class Article extends Controller {
   async findByArchive() {
     const { ctx, service } = this;
     const validatorParams = struct({
-      timeline: 'string'
+      timeline: 'string',
     });
     const validatorQuery = struct({
       pageSize: 'string?',
-      pageLimit: 'string?'
+      pageLimit: 'string?',
     });
     try {
       validatorParams(ctx.params);
@@ -250,7 +251,7 @@ class Article extends Controller {
     const validatorQuery = struct({
       pageSize: 'string?',
       pageLimit: 'string?',
-      keywords: 'string'
+      keywords: 'string',
     });
     try {
       validatorQuery(ctx.query);
