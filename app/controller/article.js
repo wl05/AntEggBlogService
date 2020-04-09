@@ -232,7 +232,7 @@ class Article extends Controller {
     if (typeof date.getTime() !== 'number') {
       return ctx.helper.error(ctx, error_002[0], error_002[1]);
     }
-    let start = date.getTime(),
+    const start = date.getTime(),
       month = date.getMonth() === 11 ? 1 : date.getMonth() + 2,
       year = date.getMonth() === 11 ? date.getFullYear() + 1 : date.getFullYear(),
       endTimeline = `${year}-${month}`,
