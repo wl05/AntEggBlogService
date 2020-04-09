@@ -1,3 +1,4 @@
+'use strict';
 const Service = require('egg').Service;
 
 class UserService extends Service {
@@ -9,7 +10,7 @@ class UserService extends Service {
     return await this.ctx.model.User.findOne(condition, {
       password: 0,
       salt: 0,
-      activated: 0
+      activated: 0,
     });
   }
 
@@ -21,7 +22,7 @@ class UserService extends Service {
     return await this.ctx.model.User.findById({ _id }, {
       password: 0,
       salt: 0,
-      activated: 0
+      activated: 0,
     });
   }
 
@@ -29,7 +30,7 @@ class UserService extends Service {
     return await this.ctx.model.User.find({}, {
       password: 0,
       salt: 0,
-      activated: 0
+      activated: 0,
     });
   }
 

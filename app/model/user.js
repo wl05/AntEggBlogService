@@ -1,3 +1,4 @@
+'use strict';
 const rand = require('csprng');
 const sha1 = require('sha1');
 module.exports = app => {
@@ -7,23 +8,23 @@ module.exports = app => {
   const UserSchema = new Schema({
     name: {
       type: String,
-      required: true
+      required: true,
     },
     gender: {
       type: String,
-      enum: [ 'male', 'female' ], // 0存在 1更新，2 删除
-      default: 'male'
+      enum: ['male', 'female'], // 0存在 1更新，2 删除
+      default: 'male',
     },
     email: {
-      type: String
+      type: String,
     },
     password: {
       type: String,
-      required: true
+      required: true,
     },
     salt: {
       type: String,
-      default: ''
+      default: '',
     },
     role: {
       type: Number,
@@ -31,24 +32,24 @@ module.exports = app => {
     },
     activated: {
       type: String,
-      enum: [ '0', '1' ], // 0待激活 1已激活
-      default: '0'
+      enum: ['0', '1'], // 0待激活 1已激活
+      default: '0',
     },
     createAt: {
       type: Number,
-      default: Date.now
+      default: Date.now,
     },
     updatedAt: {
-      type: Number
+      type: Number,
     },
     deletedAt: {
-      type: Number
+      type: Number,
     },
     status: { // 状态
       type: String,
-      enum: [ '0', '1', '2' ], // 0存在 1更新，2 删除
-      default: '0'
-    }
+      enum: ['0', '1', '2'], // 0存在 1更新，2 删除
+      default: '0',
+    },
   }, { versionKey: false });
   const User = mongoose.model('Users', UserSchema);
   initialize(User);
@@ -71,7 +72,7 @@ function initialize(User) {
         email: '2929712050@qq.com',
         name: 'admin',
         password: sha1('admin' + salt),
-        salt: salt
+        salt,
       }).save();
     } else {
       console.log('initialize successfully');

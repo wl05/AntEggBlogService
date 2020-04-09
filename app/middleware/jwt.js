@@ -1,3 +1,4 @@
+'use strict';
 const { error_003, error_005, error_001 } = require('../common/common');
 
 module.exports = () => {
@@ -10,8 +11,8 @@ module.exports = () => {
         userInfo = await ctx.app.redis.get(`${token}`);
         if (!userInfo) {
           ctx.body = {
-            code: error_005[ 0 ],
-            message: error_005[ 1 ]
+            code: error_005[0],
+            message: error_005[1],
           };
           ctx.status = 200;
         } else {
@@ -22,8 +23,8 @@ module.exports = () => {
       } catch (err) {
         console.log(err);
         ctx.body = {
-          code: error_001[ 0 ],
-          message: error_001[ 1 ]
+          code: error_001[0],
+          message: error_001[1],
         };
         ctx.status = 200;
         return;
@@ -32,8 +33,8 @@ module.exports = () => {
     } else {
       // 如果token为空，则代表客户没有登录
       ctx.body = {
-        code: error_005[ 0 ],
-        message: error_005[ 1 ]
+        code: error_005[0],
+        message: error_005[1],
       };
       ctx.status = 200;
     }

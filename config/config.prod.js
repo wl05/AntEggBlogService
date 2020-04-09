@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 // mongodb用户名密码配置文件需要自己建，我是在服务器上自己建的
 const mongoConfig = require('./mongoConfig');
 // redis配置文件需要自己建，我是在服务器上自己建的

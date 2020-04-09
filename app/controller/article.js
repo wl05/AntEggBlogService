@@ -13,12 +13,12 @@ class Article extends Controller {
       htmlValue: 'string?',
       publishAt: 'number',
       category: 'string',
-      publishStatus: struct.enum([ '1', '2' ])
+      publishStatus: struct.enum(['1', '2'])
     });
     try {
       validator(ctx.request.body);
     } catch (err) {
-      return ctx.helper.error(ctx, error_002[ 0 ], error_002[ 1 ]);
+      return ctx.helper.error(ctx, error_002[0], error_002[1]);
     }
 
     try {
@@ -31,7 +31,7 @@ class Article extends Controller {
       const article = await service.article.create(content);
       return ctx.helper.success(ctx, article);
     } catch (err) {
-      return ctx.helper.error(ctx, error_001[ 0 ], error_001[ 1 ]);
+      return ctx.helper.error(ctx, error_001[0], error_001[1]);
     }
   }
 
@@ -44,7 +44,7 @@ class Article extends Controller {
     try {
       validator(this.ctx.params);
     } catch (err) {
-      return ctx.helper.error(ctx, error_002[ 0 ], error_002[ 1 ]);
+      return ctx.helper.error(ctx, error_002[0], error_002[1]);
     }
 
     try {
@@ -53,7 +53,7 @@ class Article extends Controller {
       return ctx.helper.success(ctx, article);
     } catch (err) {
       console.log(err);
-      return ctx.helper.error(ctx, error_001[ 0 ], error_001[ 1 ]);
+      return ctx.helper.error(ctx, error_001[0], error_001[1]);
     }
   }
 
@@ -67,7 +67,7 @@ class Article extends Controller {
     try {
       validator(ctx.request.query);
     } catch (err) {
-      return ctx.helper.error(ctx, error_002[ 0 ], error_002[ 1 ]);
+      return ctx.helper.error(ctx, error_002[0], error_002[1]);
     }
 
     try {
@@ -80,7 +80,7 @@ class Article extends Controller {
       return ctx.helper.success(ctx, article);
     } catch (err) {
       console.log(err);
-      return ctx.helper.error(ctx, error_001[ 0 ], error_001[ 1 ]);
+      return ctx.helper.error(ctx, error_001[0], error_001[1]);
     }
   }
 
@@ -95,14 +95,14 @@ class Article extends Controller {
       markdownValue: 'string?',
       htmlValue: 'string?',
       publishAt: 'number?',
-      publishStatus: struct.enum([ '1', '2' ]),
+      publishStatus: struct.enum(['1', '2']),
       category: 'string',
     });
     try {
       validatorParams(ctx.params);
       validatorBody(ctx.request.body);
     } catch (err) {
-      return ctx.helper.error(ctx, error_002[ 0 ], error_002[ 1 ]);
+      return ctx.helper.error(ctx, error_002[0], error_002[1]);
     }
     try {
       const updatingContent = {
@@ -130,7 +130,7 @@ class Article extends Controller {
       return ctx.helper.success(ctx, article);
     } catch (err) {
       console.log(err);
-      return ctx.helper.error(ctx, error_001[ 0 ], error_001[ 1 ]);
+      return ctx.helper.error(ctx, error_001[0], error_001[1]);
     }
   }
 
@@ -142,7 +142,7 @@ class Article extends Controller {
     try {
       validator(ctx.params);
     } catch (err) {
-      return ctx.helper.error(ctx, error_002[ 0 ], error_002[ 1 ]);
+      return ctx.helper.error(ctx, error_002[0], error_002[1]);
     }
 
     try {
@@ -154,7 +154,7 @@ class Article extends Controller {
 
       return ctx.helper.success(ctx, article);
     } catch (err) {
-      return ctx.helper.error(ctx, error_001[ 0 ], error_001[ 1 ]);
+      return ctx.helper.error(ctx, error_001[0], error_001[1]);
     }
   }
 
@@ -166,14 +166,14 @@ class Article extends Controller {
     try {
       validatorParams(ctx.params);
     } catch (err) {
-      return ctx.helper.error(ctx, error_002[ 0 ], error_002[ 1 ]);
+      return ctx.helper.error(ctx, error_002[0], error_002[1]);
     }
     try {
       const article = await service.article.findByTag(ctx.params.tag);
       return ctx.helper.success(ctx, article);
     } catch (err) {
       console.log(err);
-      return ctx.helper.error(ctx, error_001[ 0 ], error_001[ 1 ]);
+      return ctx.helper.error(ctx, error_001[0], error_001[1]);
     }
   }
 
@@ -190,14 +190,14 @@ class Article extends Controller {
       validatorParams(ctx.params);
       validatorQuery(ctx.query);
     } catch (err) {
-      return ctx.helper.error(ctx, error_002[ 0 ], error_002[ 1 ]);
+      return ctx.helper.error(ctx, error_002[0], error_002[1]);
     }
     try {
       const article = await service.article.findByCategory(ctx.params.category, ctx.query.pageSize, ctx.query.pageLimit);
       return ctx.helper.success(ctx, article);
     } catch (err) {
       console.log(err);
-      return ctx.helper.error(ctx, error_001[ 0 ], error_001[ 1 ]);
+      return ctx.helper.error(ctx, error_001[0], error_001[1]);
     }
   }
 
@@ -208,7 +208,7 @@ class Article extends Controller {
       return ctx.helper.success(ctx, _archives);
     } catch (err) {
       console.log(err);
-      return ctx.helper.error(ctx, error_001[ 0 ], error_001[ 1 ]);
+      return ctx.helper.error(ctx, error_001[0], error_001[1]);
     }
   }
 
@@ -225,11 +225,11 @@ class Article extends Controller {
       validatorParams(ctx.params);
       validatorQuery(ctx.query);
     } catch (err) {
-      return ctx.helper.error(ctx, error_002[ 0 ], error_002[ 1 ]);
+      return ctx.helper.error(ctx, error_002[0], error_002[1]);
     }
     const date = (new Date(ctx.params.timeline));
     if (typeof date.getTime() !== 'number') {
-      return ctx.helper.error(ctx, error_002[ 0 ], error_002[ 1 ]);
+      return ctx.helper.error(ctx, error_002[0], error_002[1]);
     }
     let start = date.getTime(),
       month = date.getMonth() === 11 ? 1 : date.getMonth() + 2,
@@ -241,7 +241,7 @@ class Article extends Controller {
       return ctx.helper.success(ctx, _archives);
     } catch (err) {
       console.log(err);
-      return ctx.helper.error(ctx, error_001[ 0 ], error_001[ 1 ]);
+      return ctx.helper.error(ctx, error_001[0], error_001[1]);
     }
   }
 
@@ -255,13 +255,13 @@ class Article extends Controller {
     try {
       validatorQuery(ctx.query);
     } catch (err) {
-      return ctx.helper.error(ctx, error_002[ 0 ], error_002[ 1 ]);
+      return ctx.helper.error(ctx, error_002[0], error_002[1]);
     }
     try {
       const article = await service.article.findByKeywords(ctx.query.keywords.trim(), ctx.query.pageSize, ctx.query.pageLimit);
       return ctx.helper.success(ctx, article);
     } catch (err) {
-      return ctx.helper.error(ctx, error_001[ 0 ], error_001[ 1 ]);
+      return ctx.helper.error(ctx, error_001[0], error_001[1]);
     }
   }
 }

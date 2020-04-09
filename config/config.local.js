@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 exports.mongoose = {
     client: {
         url: 'mongodb://127.0.0.1:27017/ant_blog',
@@ -13,7 +13,7 @@ exports.redis = {
         host: '127.0.0.1', // Redis host
         password: '123123',
         db: 0,
-    }
+    },
 };
 
 exports.baseUrl = 'http://127.0.0.1:7001';

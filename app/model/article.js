@@ -1,3 +1,4 @@
+'use strict';
 module.exports = app => {
   const mongoose = app.mongoose;
   const Schema = mongoose.Schema;
@@ -5,65 +6,65 @@ module.exports = app => {
   const ArticleSchema = new Schema({
     title: {
       type: String,
-      required: true
+      required: true,
     },
     tag: {
       type: Schema.ObjectId,
       ref: 'Tags',
-      required: true
+      required: true,
     },
     tag_detail: {
       type: Object,
-      required: true
+      required: true,
     },
     category: {
       type: Schema.ObjectId,
       ref: 'Categories',
-      required: true
+      required: true,
     },
     category_detail: {
       type: Object,
-      required: true
+      required: true,
     },
     creator: {
       type: Schema.ObjectId,
       ref: 'Users',
-      required: true
+      required: true,
     },
     htmlValue: {
-      type: String
+      type: String,
     },
     markdownValue: {
-      type: String
+      type: String,
     },
     publishAt: { // 发布日期
       type: Number,
-      required: true
+      required: true,
     },
     publishStatus: {
       type: String,
       default: '1',
-      enum: [ '1', '2' ] // '1'表示草稿，'2'表示发布
+      enum: ['1', '2'], // '1'表示草稿，'2'表示发布
     },
     viewCount: {
       type: Number,
-      default: 0
+      default: 0,
     },
     createAt: {
       type: Number,
-      default: Date.now
+      default: Date.now,
     },
     updatedAt: {
-      type: Number
+      type: Number,
     },
     deletedAt: {
-      type: Number
+      type: Number,
     },
     status: { // 状态
       type: String,
-      enum: [ '0', '1', '2' ], // 0存在 1更新，2 删除
-      default: '0'
-    }
+      enum: ['0', '1', '2'], // 0存在 1更新，2 删除
+      default: '0',
+    },
   }, { versionKey: false });
 
   return mongoose.model('Article', ArticleSchema);

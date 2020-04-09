@@ -90,24 +90,24 @@ class ArticleService extends Service {
 
   async aggregateArchives() {
     return await this.ctx.model.Article.aggregate([
-        {
-          '$group': {
-            '_id': {
-              '$dateToString': {
-                'format': '%Y-%m',
-                'date': {
-                  '$add': [
-                    new Date(0),
-                    { '$multiply': [ 1, '$publishAt' ] }
-                  ]
-                }
+      {
+        '$group': {
+          '_id': {
+            '$dateToString': {
+              'format': '%Y-%m',
+              'date': {
+                '$add': [
+                  new Date(0),
+                  { '$multiply': [1, '$publishAt'] }
+                ]
               }
-            },
-            'count': { '$sum': 1 }
-          }
-        },
-        { $sort: { '_id': -1 } }
-      ]
+            }
+          },
+          'count': { '$sum': 1 }
+        }
+      },
+      { $sort: { '_id': -1 } }
+    ]
     );
 
   }

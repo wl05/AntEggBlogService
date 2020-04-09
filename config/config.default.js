@@ -23,7 +23,7 @@ module.exports = appInfo => {
       enable: false,
       ignoreJSON: false,
     },
-    domainWhiteList: [ '*' ],
+    domainWhiteList: ['*'],
   };
   // config cors
   config.cors = {
