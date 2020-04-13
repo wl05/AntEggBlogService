@@ -30,5 +30,5 @@ module.exports = app => {
   router.delete('/categories/:id', jwt, controller.categories.deleteCategory);
   router.get('/authcode', controller.user.generateAuthCode);
   router.post('/signup', controller.user.signup);
-  router.get('/activation', controller.user.userActivation);
+  // router.get('/activation', controller.user.userActivation);
 };

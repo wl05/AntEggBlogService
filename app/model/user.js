@@ -33,7 +33,7 @@ module.exports = app => {
     activated: {
       type: String,
       enum: ['0', '1'], // 0待激活 1已激活
-      default: '0',
+      default: '1',
     },
     createAt: {
       type: Number,
