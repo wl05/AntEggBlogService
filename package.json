@@ -1,7 +1,7 @@
 {
-    "name": "AntEggBlogService",
+    "name": "ant-egg-blog-service",
     "version": "1.0.0",
-    "description": "",
+    "description": "my blog",
     "private": true,
     "dependencies": {
         "axios": "^0.18.0",
