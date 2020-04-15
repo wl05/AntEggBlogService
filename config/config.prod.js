@@ -15,7 +15,7 @@ exports.mongoose = {
 exports.redis = {
   client: {
     port: 6379, // Redis port
-    host: '182.254.168.74', // Redis host
+    host: '127.0.0.1', // Redis host
     password: redisConfig.password,
     db: 0,
   },
