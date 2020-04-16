@@ -3,35 +3,27 @@ module.exports = app => {
   const mongoose = app.mongoose;
   const Schema = mongoose.Schema;
 
-  const comments = new Schema({
+  const CommentSchema = new Schema({
+    article_id: { // 文档id
+      type: String,
+      required: true,
+    },
     user_id: { // 评论人id
       type: Schema.ObjectId,
       ref: 'Users',
       required: true,
     },
-    content: {
+    content: { // 回复的内容
       type: String,
       required: true,
     },
-    replyTo: { // 回复
-      comment_id: { // 区分回复的是哪一条
-        type: Schema.ObjectId,
-        required: true,
-      },
-      reply_to_user_id: { // 标示回复的哪一个人
-        type: Schema.ObjectId,
-        ref: 'Users',
-      },
+    reply_to_comment_id: { // 标识回复的哪一条评论
+      type: Schema.ObjectId,
     },
-  });
-
-
-  const CommentSchema = new Schema({
-    article_id: {
-      type: String,
-      required: true,
+    reply_to_user_id: { // 标识回复的哪一个人
+      type: Schema.ObjectId,
+      ref: 'Users',
     },
-    comments: [comments],
     createAt: {
       type: Number,
       default: Date.now,

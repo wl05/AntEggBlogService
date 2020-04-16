@@ -28,7 +28,10 @@ module.exports = app => {
   router.get('/categories/count', controller.categories.getAggregateCategories);
   router.put('/categories/:id', jwt, controller.categories.findByIdAndUpdate);
   router.delete('/categories/:id', jwt, controller.categories.deleteCategory);
+  router.post('/comment/', jwt, controller.comment.create);
+  router.get('/comment/:article_id', jwt, controller.comment.getCommentByArticleId);
   router.get('/authcode', controller.user.generateAuthCode);
   router.post('/signup', controller.user.signup);
   // router.get('/activation', controller.user.userActivation);
+
 };
