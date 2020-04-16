@@ -8,7 +8,7 @@ module.exports = app => {
       type: String,
       required: true,
     },
-    user_id: { // 评论人id
+    commentator: { // 评论人id
       type: Schema.ObjectId,
       ref: 'Users',
       required: true,

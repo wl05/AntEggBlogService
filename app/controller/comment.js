@@ -6,16 +6,15 @@ const { error_001, error_002 } = require('../common/common');
 class Comment extends Controller {
   // post comment
   async create() {
-    console.log('=======1');
     const { ctx, service } = this;
     const validator = struct({
       article_id: 'string',
-      user_id: 'string',
+      commentator: 'string',
       content: 'string',
       reply_to_comment_id: 'string?',
       reply_to_user_id: 'string?',
     });
-    const params = { ...ctx.request.body, user_id: ctx.id };
+    const params = { ...ctx.request.body, commentator: ctx.id };
     try {
       validator(params);
     } catch (err) {
@@ -24,9 +23,7 @@ class Comment extends Controller {
     }
 
     try {
-      console.log('params', params);
-      const res = await service.comment.create(params);
-      console.log('=======', res);
+      await service.comment.create(params);
       return ctx.helper.success(ctx);
     } catch (err) {
       console.log('err', err);
@@ -48,7 +45,9 @@ class Comment extends Controller {
 
     try {
       const res = await service.comment.find(ctx.request.params);
-      console.log('======', res);
+      for (const val of res) {
+        val.sub_comments = [];
+      }
       return ctx.helper.success(ctx, res);
     } catch (err) {
       return ctx.helper.error(ctx, error_001[0], error_001[1]);
