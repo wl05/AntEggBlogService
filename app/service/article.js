@@ -38,7 +38,7 @@ class ArticleService extends Service {
   }
 
   async findOne(condition) {
-    return await this.ctx.model.Article.find({
+    return await this.ctx.model.Article.findOne({
       ...condition,
       status: { $ne: '2' },
     }, {

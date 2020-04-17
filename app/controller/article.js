@@ -43,14 +43,14 @@ class Article extends Controller {
     });
 
     try {
-      validator(this.ctx.params);
+      validator(ctx.params);
     } catch (err) {
       return ctx.helper.error(ctx, error_002[0], error_002[1]);
     }
 
     try {
       await service.article.updateViewCount(this.ctx.params._id);
-      const article = await service.article.find(this.ctx.params);
+      const article = await service.article.findOne(this.ctx.params);
       return ctx.helper.success(ctx, article);
     } catch (err) {
       console.log(err);
