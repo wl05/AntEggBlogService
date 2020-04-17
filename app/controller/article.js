@@ -50,7 +50,7 @@ class Article extends Controller {
 
     try {
       await service.article.updateViewCount(this.ctx.params._id);
-      const article = await service.article.findOne(this.ctx.params);
+      const article = await service.article.find(this.ctx.params);
       return ctx.helper.success(ctx, article);
     } catch (err) {
       console.log(err);

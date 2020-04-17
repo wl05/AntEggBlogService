@@ -43,7 +43,7 @@ class Comment extends Controller {
     }
 
     try {
-      const res = await service.comment.find(ctx.request.params);
+      const res = await service.comment.find(ctx.params);
       const subComments = [];
       for (const val of res) {
         if (val.reply_to_comment_id) {

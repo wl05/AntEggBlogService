@@ -11,7 +11,7 @@ class ArticleService extends Service {
   }
 
   async findByIdAndUpdate(_id, content) {
-    return await this.ctx.model.Article.findByIdAndUpdate({ _id, status: { $ne: '2' } }, { $set: content });
+    return await this.ctx.model.Article.updateOne({ _id, status: { $ne: '2' } }, { $set: content });
   }
 
   async find(params) {
@@ -38,7 +38,7 @@ class ArticleService extends Service {
   }
 
   async findOne(condition) {
-    return await this.ctx.model.Article.findOne({
+    return await this.ctx.model.Article.find({
       ...condition,
       status: { $ne: '2' },
     }, {
