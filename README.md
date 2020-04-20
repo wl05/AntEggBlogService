@@ -1,8 +1,8 @@
 # AntEggBlogService
 
-> Vue.js+Egg.js+Mongodb的前后端分离的个人博客。
+> [Vue.js+Egg.js+Mongodb的前后端分离的个人博客。](https://github.com/antbaobao/AntVueBlogFront)
 
-> 博客地址：[ANT](http://120.77.219.106/#/)
+> 博客地址：[www.wangleant.com](http://www.wangleant.com/)
 
 ## 主要技术栈
 * egg、mongoose、jwt鉴权、redis
