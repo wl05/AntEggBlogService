@@ -20,7 +20,7 @@ class Tags extends Controller {
       const tag = await service.tags.create(ctx.request.body.name);
       return ctx.helper.success(ctx, tag);
     } catch (err) {
-      console.log(err);
+      this.logger(err);
       return ctx.helper.error(ctx, error_001[0], error_001[1]);
     }
   }
@@ -95,7 +95,7 @@ class Tags extends Controller {
       await service.article.updateManyByTagId(ctx.params.id);
       return ctx.helper.success(ctx);
     } catch (err) {
-      console.log(err);
+      this.logger(err);
       return ctx.helper.error(ctx, error_001[0], error_001[1]);
     }
   }

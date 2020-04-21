@@ -21,7 +21,7 @@ module.exports = () => {
           await next();
         }
       } catch (err) {
-        console.log(err);
+        this.logger(err);
         ctx.body = {
           code: error_001[0],
           message: error_001[1],

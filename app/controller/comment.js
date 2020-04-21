@@ -18,7 +18,7 @@ class Comment extends Controller {
     try {
       validator(params);
     } catch (err) {
-      console.log(err);
+      this.logger(err);
       return ctx.helper.error(ctx, error_002[0], error_002[1]);
     }
 

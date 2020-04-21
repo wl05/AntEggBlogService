@@ -59,7 +59,7 @@ module.exports = app => {
 function initialize(User) {
   User.find({}, (err, doc) => {
     if (err) {
-      console.log(err);
+      this.logger(err);
       console.log('initialize failed');
     } else if (!doc.length) {
       const salt = rand(160, 36);

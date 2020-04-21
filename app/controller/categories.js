@@ -31,7 +31,7 @@ class Categories extends Controller {
       const categories = await service.categories.find();
       return ctx.helper.success(ctx, categories);
     } catch (err) {
-      console.log(err);
+      this.logger(err);
       return ctx.helper.error(ctx, error_001[0], error_001[1]);
     }
   }
@@ -43,7 +43,7 @@ class Categories extends Controller {
       // const categories = await service.article.aggregateCategories()
       return ctx.helper.success(ctx, categories);
     } catch (err) {
-      console.log(err);
+      this.logger(err);
       return ctx.helper.error(ctx, error_001[0], error_001[1]);
     }
   }
@@ -98,7 +98,7 @@ class Categories extends Controller {
       return ctx.helper.success(ctx);
     } catch (err) {
 
-      console.log(err);
+      this.logger(err);
       return ctx.helper.error(ctx, error_001[0], error_001[1]);
     }
   }
